@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use Case Scenarios Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .code {
+            font-family: monospace;
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Use Case Scenarios Report</h1>
+    
+    <h2>1. Use Case Scenarios</h2>
+    
+    <h3>Example Use Case Scenario: Customer Creates an Account</h3>
+    <p><strong>Use Case Name:</strong> Create Account</p>
+    <p><strong>Preconditions:</strong></p>
+    <ul>
+        <li>The customer is not yet registered in the system.</li>
+        <li>The customer is on the registration page.</li>
+    </ul>
+    <p><strong>Postconditions:</strong></p>
+    <ul>
+        <li>The customer is registered in the system.</li>
+        <li>The customer can log in to the system with the new credentials.</li>
+    </ul>
+    <p><strong>Actors:</strong> Customer</p>
+    <p><strong>Main Flow:</strong></p>
+    <ol>
+        <li>The Customer navigates to the "Create Account" option on the home page.</li>
+        <li>The System shows the account creation form.</li>
+        <li>The Customer enters the required information (e.g., name, email, password) in the form.</li>
+        <li>The System validates the input fields.</li>
+        <li>The Customer submits the registration form.</li>
+        <li>The System checks if the email address is already registered.</li>
+        <li>The System creates a new account for the Customer.</li>
+        <li>The System sends a confirmation email to the Customer.</li>
+        <li>The System displays a success message and redirects the Customer to the login page.</li>
+    </ol>
+    <p><strong>Alternate Flows:</strong></p>
+    <ul>
+        <li><strong>Alternate Flow 1 (Invalid Email Format):</strong>
+            <ul>
+                <li>Step 3: The Customer enters an invalid email address (e.g., missing "@" or ".com").</li>
+                <li>System Reaction: The System displays an error message asking the Customer to correct the email format. The process returns to Step 3.</li>
+            </ul>
+        </li>
+        <li><strong>Alternate Flow 2 (Email Already Registered):</strong>
+            <ul>
+                <li>Step 6: The System detects that the email is already registered.</li>
+                <li>System Reaction: The System displays an error message and prompts the Customer to use a different email address. The process returns to Step 3.</li>
+            </ul>
+        </li>
+        <li><strong>Alternate Flow 3 (Weak Password):</strong>
+            <ul>
+                <li>Step 3: The Customer enters a weak password (e.g., less than 8 characters or lacking special characters).</li>
+                <li>System Reaction: The System displays a message requesting the Customer to create a stronger password. The process returns to Step 3.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Example Use Case Scenario: Customer Makes a Payment</h3>
+    <p><strong>Use Case Name:</strong> Customer Makes a Payment</p>
+    <p><strong>Preconditions:</strong></p>
+    <ul>
+        <li>The Customer has selected products and added them to the shopping cart.</li>
+        <li>The Customer has logged in to the system.</li>
+    </ul>
+    <p><strong>Postconditions:</strong></p>
+    <ul>
+        <li>The System processes the payment.</li>
+        <li>The Customer receives a payment confirmation.</li>
+        <li>The Order is marked as "Paid" in the system.</li>
+        <li>The System updates the inventory.</li>
+    </ul>
+    <p><strong>Actors:</strong> Customer, System</p>
+    <p><strong>Main Flow:</strong></p>
+    <ol>
+        <li>The Customer navigates to the "Cart" page.</li>
+        <li>The System displays a summary of the items in the cart.</li>
+        <li>The Customer clicks on the "Proceed to Checkout" button.</li>
+        <li>The System requests payment details (credit card, PayPal, etc.).</li>
+        <li>The Customer enters the payment details and submits the form.</li>
+        <li>The System processes the payment.</li>
+        <li>The System confirms that the payment is successful.</li>
+        <li>The System displays a payment confirmation page.</li>
+        <li>The System updates the inventory and prepares the order for dispatch.</li>
+    </ol>
+    <p><strong>Alternate Flows:</strong></p>
+    <ul>
+        <li><strong>Alternate Flow 1 (Payment Declined):</strong>
+            <ul>
+                <li>Step 6: The System detects that the payment is declined (e.g., insufficient funds).</li>
+                <li>System Reaction: The System displays a payment error message and prompts the Customer to try again with a different method. The process returns to Step 4.</li>
+            </ul>
+        </li>
+        <li><strong>Alternate Flow 2 (Invalid Payment Details):</strong>
+            <ul>
+                <li>Step 5: The Customer enters invalid payment details (e.g., expired credit card).</li>
+                <li>System Reaction: The System displays an error message and requests the Customer to update the payment details. The process returns to Step 5.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Example Use Case Scenario: Seller Adds a Product</h3>
+    <p><strong>Use Case Name:</strong> Add/Remove Product</p>
+    <p><strong>Preconditions:</strong></p>
+    <ul>
+        <li>The Seller is logged into the system.</li>
+        <li>The Seller has access to the "Seller Dashboard."</li>
+    </ul>
+    <p><strong>Postconditions:</strong></p>
+    <ul>
+        <li>A new product is added to the system.</li>
+        <li>The product is available for customers to browse and purchase.</li>
+    </ul>
+    <p><strong>Actors:</strong> Seller</p>
+    <p><strong>Main Flow:</strong></p>
+    <ol>
+        <li>The Seller navigates to the "Add Product" section on the dashboard.</li>
+        <li>The System displays a form for entering product details (name, price, description, etc.).</li>
+        <li>The Seller enters the required product details.</li>
+        <li>The Seller uploads images of the product.</li>
+        <li>The System validates the product details.</li>
+        <li>The Seller submits the form to add the product.</li>
+        <li>The System adds the product to the catalog.</li>
+        <li>The System confirms that the product has been added.</li>
+    </ol>
+    <p><strong>Alternate Flows:</strong></p>
+    <ul>
+        <li><strong>Alternate Flow 1 (Missing Required Fields):</strong>
+            <ul>
+                <li>Step 3: The Seller misses one or more required fields (e.g., price or description).</li>
+                <li>System Reaction: The System prompts the Seller to complete all required fields before submission. The process returns to Step 3.</li>
+            </ul>
+        </li>
+        <li><strong>Alternate Flow 2 (Invalid Image Format):</strong>
+            <ul>
+                <li>Step 4: The Seller uploads an unsupported image format.</li>
+                <li>System Reaction: The System displays an error message and requests the Seller to upload a valid image. The process returns to Step 4.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>2. Structure of the Use Case Scenarios</h2>
+    <p><strong>Use Case Name:</strong> Name of the use case (e.g., Create Account, Payment Process).</p>
+    <p><strong>Preconditions:</strong> Conditions that must be satisfied for the use case to start.</p>
+    <p><strong>Postconditions:</strong> Conditions that will be satisfied after the use case is executed successfully.</p>
+    <p><strong>Actors:</strong> The actors involved in the use case (e.g., Customer, System, Seller).</p>
+    <p><strong>Main Flow:</strong> The main sequence of steps describing the execution of the use case.</p>
+    <p><strong>Alternate Flows:</strong> Possible alternative flows that handle deviations from the main flow (e.g., invalid input, system errors).</p>
+
+    <h2>3. Example</h2>
+    <p><strong>Example Use Case Scenario: Customer Creates an Account</strong></p>
+    <p><strong>Name:</strong> Create Account</p>
+    <p><strong>Preconditions:</strong></p>
+    <ul>
+        <li>The Customer is not yet registered in the system.</li>
+        <li>The Customer is on the registration page.</li>
+    </ul>
+    <p><strong>Postconditions:</strong></p>
+    <ul>
+        <li>The Customer is registered in the system.</li>
+        <li>The Customer can log in to the system with the new credentials.</li>
+    </ul>
+    <p><strong>Actors:</strong> Customer</p>
+    <p><strong>Main Flow:</strong></p>
+    <ol>
+        <li>The Customer navigates to the "Create Account" option on the home page.</li>
+        <li>The System shows the account creation form.</li>
+        <li>The Customer enters the required information (e.g., name, email, password) in the form.</li>
+        <li>The System validates the input fields.</li>
+        <li>The Customer submits the registration form.</li>
+        <li>The System checks if the email address is already registered.</li>
+        <li>The System creates a new account for the Customer.</li>
+        <li>The System sends a confirmation email to the Customer.</li>
+        <li>The System displays a success message and redirects the Customer to the login page.</li>
+    </ol>
+    <p><strong>Alternate Flows:</strong></p>
+    <ul>
+        <li><strong>Alternate Flow 1 (Invalid Email Format):</strong>
+            <ul>
+                <li>Step 3: The Customer enters an invalid email address (e.g., missing "@" or ".com").</li>
+                <li>System Reaction: The System displays an error message asking the Customer to correct the email format. The process returns to Step 3.</li>
+            </ul>
+        </li>
+        <li><strong>Alternate Flow 2 (Email Already Registered):</strong>
+            <ul>
+                <li>Step 6: The System detects that the email is already registered.</li>
+                <li>System Reaction: The System displays an error message and prompts the Customer to use a different email address. The process returns to Step 3.</li>
+            </ul>
+        </li>
+        <li><strong>Alternate Flow 3 (Weak Password):</strong>
+            <ul>
+                <li>Step 3: The Customer enters a weak password (e.g., less than 8 characters or lacking special characters).</li>
+                <li>System Reaction: The System displays a message requesting the Customer to create a stronger password. The process returns to Step 3.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>4. Additional Use Case Scenarios</h2>
+    
+    <table border="1" style="width: 100%; margin: 20px 0; border-collapse: collapse;">
+        <tbody>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Author name:</th>
+                <td style="padding: 10px; width: 15cm;">Eren</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Author surname:</th>
+                <td style="padding: 10px; width: 15cm;">Budak</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Author group:</th>
+                <td style="padding: 10px; width: 15cm;">Group 1</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Subject:</th>
+                <td style="padding: 10px; width: 15cm;">Online Shopping</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Use Case:</th>
+                <td style="padding: 10px; width: 15cm;">Create Account</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Language:</th>
+                <td style="padding: 10px; width: 15cm;">English</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Preconditions:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>The customer is not yet registered in the system.</li>
+                        <li>The customer is on the registration page.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Postconditions:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>The customer is yet registered in the system.</li>
+                        <li>The customer can log in to the system with the new credentials.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Actors:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>Customer</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Main flow:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ol>
+                        <li>The Customer navigates to the "Create Account" option on the home page.</li>
+                        <li>The System shows the account creation form.</li>
+                        <li>The Customer enters the required information (e.g., name, email, password) in the form.</li>
+                        <li>The System validates the input fields.</li>
+                        <li>The Customer submits the registration form.</li>
+                        <li>The System checks if the email address is already registered.</li>
+                        <li>The System creates a new account for the Customer.</li>
+                        <li>The System sends a confirmation email to the Customer.</li>
+                        <li>The System displays a success message and redirects the Customer to the login page.</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Alternate flow:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>
+                            <strong>1.</strong> The Customer enters an invalid email address (e.g., missing "@" or ".com"). The System displays an error message asking the Customer to correct the email format. The process returns to Step 3. <em>END FLOW → 3</em>
+                        </li>
+                        <li>
+                            <strong>2.</strong> The System detects that the email is already registered. The System displays an error message and prompts the Customer to use a different email address. The process returns to Step 3. <em>END FLOW → 3</em>
+                        </li>
+                        <li>
+                            <strong>3.</strong> The Customer enters a weak password (e.g., less than 8 characters or lacking special characters). The System displays a message requesting the Customer to create a stronger password. The process returns to Step 3. <em>END FLOW → 3</em>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table border="1" style="width: 100%; margin: 20px 0; border-collapse: collapse;">
+        <tbody>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Author name:</th>
+                <td style="padding: 10px; width: 15cm;">Zehra</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Author surname:</th>
+                <td style="padding: 10px; width: 15cm;">Gullendi</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Author group:</th>
+                <td style="padding: 10px; width: 15cm;">Group 1</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Subject:</th>
+                <td style="padding: 10px; width: 15cm;">Online Shopping</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Use Case:</th>
+                <td style="padding: 10px; width: 15cm;">Create Account</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Language:</th>
+                <td style="padding: 10px; width: 15cm;">English</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Preconditions:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>The user must have an active account on shopping platform</li>
+                        <li>The user must have placed an order (delivered or in progress)</li>
+                        <li>The user has logged into the system</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Postconditions:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>Petition is submitted and acknowledged by the system</li>
+                        <li>The issue is logged in the system and queued for resolution</li>
+                        <li>User receives a notification that the petition is successfully sent.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Actors:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>Customer</li>
+                        <li>Customer Support</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Main flow:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ol>
+                        <li>The User (customer) logs into the platform</li>
+                        <li>Customer navigates to the Orders section</li>
+                        <li>Customer selects the order for which they want to file a report (e.g., damaged item, wrong product)</li>
+                        <li>Customer clicks the Report Issue button.</li>
+                        <li>The system displays a form for the user to fill in details about the issue (e.g., issue type, description)</li>
+                        <li>Customer submits the report petition</li>
+                        <li>The system generates a petition ID</li>
+                        <li>System sends a confirmation mail or notification to the user with details of the petition</li>
+                        <li>The issue is forwarded to the backend team for resolution</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Alternate flow:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>
+                            <strong>1.</strong> User encounters an error during submission (due to missing information or a technical issue). The customer can re-submit the form after addressing the issue. The process returns to Step 5. <em>END FLOW → 5</em>
+                        </li>
+                        <li>
+                            <strong>2.</strong> User cancels the report petition (user can do it before submitting the petition). System discards the previous input and redirects the user back to the Orders section; the process ends before returning to the Main Flow. <em>END FLOW</em>
+                        </li>
+                        <li>
+                            <strong>3.</strong> No relevant order found (e.g. the order was canceled). The system displays an error message instead of a notification of confirmation for successful submission. The process returns to Step 3. <em>END FLOW → 3</em>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table border="1" style="width: 100%; margin: 20px 0; border-collapse: collapse;">
+        <tbody>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Author name:</th>
+                <td style="padding: 10px; width: 15cm;">Jack</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Author surname:</th>
+                <td style="padding: 10px; width: 15cm;">Brown</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Author group:</th>
+                <td style="padding: 10px; width: 15cm;">Group 1</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Subject:</th>
+                <td style="padding: 10px; width: 15cm;">Online Shopping</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Use Case:</th>
+                <td style="padding: 10px; width: 15cm;">Wishlist Management</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Language:</th>
+                <td style="padding: 10px; width: 15cm;">Polish</td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Preconditions:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>The user must have an active account</li>
+                        <li>The user must be logged into the platform</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Postconditions:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>The user's wishlist is updated successfully</li>
+                        <li>The system notifies the user of successful changes on the wishlist</li>
+                        <li>The wishlist data is saved in the database for future retrieval</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Actors:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>The customer (user)</li>
+                        <li>The system</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Main flow:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ol>
+                        <li>The user logs into the shopping platform</li>
+                        <li>The user navigates to a product they are interested in</li>
+                        <li>The user clicks the "Add Wishlist" button</li>
+                        <li>The system confirms the product being added to the wishlist</li>
+                        <li>The customer can view the wishlist by opening their wishlist on their menu</li>
+                        <li>The system updates the wishlist with the newly added product</li>
+                        <li>The user can modify by removing items or moving items to the shopping cart</li>
+                        <li>The system updates the wishlist based on the changes made by the customer</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left; background-color: #f4f4f4;">Alternate flow:</th>
+                <td style="padding: 10px; width: 15cm;">
+                    <ul>
+                        <li>
+                            <strong>1.</strong> Attempt to add out-of-stock products to list; the system prevents the addition and shows an error message. 
+                            <em>END FLOW</em>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h2>5. Conclusion</h2>
+    <p>
+        The use case scenarios outlined in this report provide a comprehensive understanding of the various interactions between users and the system in the context of online shopping. From account creation to issue reporting, each scenario illustrates the critical steps and potential error handling that ensure a smooth user experience. By considering both the main and alternate flows, these scenarios allow developers and stakeholders to identify and address possible challenges, thereby enhancing system functionality and customer satisfaction. Stakeholders are encouraged to utilize these findings to refine product features and optimize user engagement methods.
+    </p>
+</body>
+</html>

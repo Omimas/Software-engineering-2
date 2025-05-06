@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observer Pattern Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/plantuml-encoder@1.4.0/dist/plantuml-encoder.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const umlCode = `
+@startuml
+class Subject {
+    +attach(Observer o)
+    +detach(Observer o)
+    +notify()
+}
+
+class Observer {
+    +update()
+}
+
+class Product {
+    +getDetails()
+    +addToCart()
+}
+
+class Electronics extends Product {
+    +getDetails()
+    +addToCart()
+}
+
+class Clothing extends Product {
+    +getDetails()
+    +addToCart()
+}
+
+class Books extends Product {
+    +getDetails()
+    +addToCart()
+}
+
+class Inventory extends Subject {
+    -List<Product> products
+    +addProduct(Product p)
+    +removeProduct(Product p)
+    +notify()
+}
+
+class ProductObserver extends Observer {
+    -Product product
+    +update()
+}
+Subject <|-- Inventory
+Observer <|-- ProductObserver
+Product <|-- Electronics
+Product <|-- Clothing
+Product <|-- Books
+Inventory o-- Product
+ProductObserver --> Product
+@enduml
+            `;
+            const encodedUML = plantumlEncoder.encode(umlCode);
+            const diagramUrl = `https://www.plantuml.com/plantuml/svg/${encodedUML}`;
+            document.getElementById('class-diagram').innerHTML = `<img src="${diagramUrl}" alt="Class Diagram">`;
+        });
+    </script>
+</head>
+<body>
+
+<h1>Observer Pattern Report</h1>
+
+<h2>1. Identify the Place for the Behavioural Design Pattern in the System</h2>
+<p>In the system, the <strong>Observer Pattern</strong> can be used to notify different product categories or furniture styles about changes in the inventory or availability. This pattern is particularly useful when we want to minimize the need for polling and dynamically change the receivers of notifications.</p>
+
+<h2>2. Describe the Problem That Justifies the Need for the Design Pattern</h2>
+<p><strong>Problem:</strong> Different product categories or furniture styles need to be notified about changes in inventory or availability. Without a proper notification mechanism, each product category would need to constantly check for updates, leading to inefficient code and increased complexity.</p>
+
+<h2>3. Describe the Pattern, Its Theory, and Its Place in the System</h2>
+<p>The <strong>Observer Pattern</strong> defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically. In this system, the Observer Pattern can be used to notify different product categories about changes in inventory or availability, ensuring that all relevant parties are updated without the need for constant polling.</p>
+
+<h2>4. Create a Class Diagram for the Pattern</h2>
+<p>Below is a class diagram showing how the <strong>Observer Pattern</strong> can be implemented in the system:</p>
+<div id="class-diagram"></div> <!-- UML diyagramı burada görüntülenecek -->
+
+<pre><code class="lang-plantuml">
+@startuml
+class Subject {
+    +attach(Observer o)
+    +detach(Observer o)
+    +notify()
+}
+
+class Observer {
+    +update()
+}
+
+class Product {
+    +getDetails()
+    +addToCart()
+}
+
+class Electronics extends Product {
+    +getDetails()
+    +addToCart()
+}
+
+class Clothing extends Product {
+    +getDetails()
+    +addToCart()
+}
+
+class Books extends Product {
+    +getDetails()
+    +addToCart()
+}
+
+class Inventory extends Subject {
+    -List&lt;Product&gt; products
+    +addProduct(Product p)
+    +removeProduct(Product p)
+    +notify()
+}
+
+class ProductObserver extends Observer {
+    -Product product
+    +update()
+}
+
+Subject &lt;|-- Inventory
+Observer &lt;|-- ProductObserver
+Product &lt;|-- Electronics
+Product &lt;|-- Clothing
+Product &lt;|-- Books
+Inventory o-- Product
+ProductObserver --&gt; Product
+@enduml
+</code></pre>
+
+<h2>5. Create the Source Code That Implements the Pattern</h2>
+<p>Below is an example of Java code that implements the <strong>Observer Pattern</strong>:</p>
+
+<pre><code class="lang-java">
+import java.util.ArrayList;
+import java.util.List;
+
+// Subject Interface
+interface Subject {
+    void attach(Observer o);
+    void detach(Observer o);
+    void notifyObservers();
+}
+
+// Observer Interface
+interface Observer {
+    void update();
+}
+
+// Concrete Subject
+class Inventory implements Subject {
+    private List&lt;Observer&gt; observers = new ArrayList&lt;&gt;();
+    private List&lt;Product&gt; products = new ArrayList&lt;&gt;();
+
+    public void addProduct(Product product) {
+        products.add(product);
+        notifyObservers();
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
+        notifyObservers();
+    }
+
+    @Override
+    public void attach(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void detach(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update();
+        }
+    }
+}
+
+// Concrete Observer
+class ProductObserver implements Observer {
+    private Product product;
+
+    public ProductObserver(Product product) {
+        this.product = product;
+    }
+
+    @Override
+    public void update() {
+        System.out.println("Product " + product.getDetails() + " has been updated in the inventory.");
+    }
+}
+
+// Product Interface
+interface Product {
+    String getDetails();
+    void addToCart();
+}
+
+// Concrete Products
+class Electronics implements Product {
+    @Override
+    public String getDetails() {
+        return "Electronics: High-end laptop";
+    }
+
+    @Override
+    public void addToCart() {
+        System.out.println("Electronics added to cart.");
+    }
+}
+
+class Clothing implements Product {
+    @Override
+    public String getDetails() {
+        return "Clothing: Blue jeans";
+    }
+
+    @Override
+    public void addToCart() {
+        System.out.println("Clothing added to cart.");
+    }
+}
+
+class Books implements Product {
+    @Override
+    public String getDetails() {
+        return "Books: Design Patterns by Erich Gamma";
+    }
+
+    @Override
+    public void addToCart() {
+        System.out.println("Books added to cart.");
+    }
+}
+
+// Client Code
+public class Client {
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+        Product electronics = new Electronics();
+        ProductObserver electronicsObserver = new ProductObserver(electronics);
+
+        inventory.attach(electronicsObserver);
+        inventory.addProduct(electronics);
+    }
+}
+</code></pre>
+
+<h2>6. Create the Test Source Code for the Pattern</h2>
+<p>Below is an example of Java test code for the <strong>Observer Pattern</strong>:</p>
+
+<pre><code class="lang-java">
+public class ObserverPatternTest {
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+        Product electronics = new Electronics();
+        ProductObserver electronicsObserver = new ProductObserver(electronics);
+
+        inventory.attach(electronicsObserver);
+        inventory.addProduct(electronics); // Output: Product Electronics: High-end laptop has been updated in the inventory.
+    }
+}
+</code></pre>
+
+<h2>Conclusion</h2>
+<p>In these tasks, we used the <strong>Observer Pattern</strong> to notify different product categories about changes in the inventory. This allows the system to dynamically update the relevant parties without the need for constant polling, making the code more efficient and easier to maintain.</p>
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laboratory 14 Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            max-width: 1200px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: monospace;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ol, ul {
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/plantuml-encoder@1.4.0/dist/plantuml-encoder.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const diagram1 = `
+@startuml
+actor Customer
+participant "Product Page" as ProductPage
+participant "System" as System
+participant "Customer Class" as CustomerClass
+participant "Favorites List" as FavoritesList
+Customer -> ProductPage : Opens product page
+Customer -> ProductPage : Clicks "Add to Favorites" button
+ProductPage -> System : Sends request to add product to favorites
+System -> CustomerClass : Calls addToFavorites(product)
+CustomerClass -> FavoritesList : Checks if product is already in favorites
+alt Product not in favorites
+    CustomerClass -> FavoritesList : Adds product to favorites
+    CustomerClass --> System : Returns success message
+    System --> ProductPage : Displays success message
+else Product already in favorites
+    CustomerClass --> System : Returns warning message
+    System --> ProductPage : Displays warning message
+end
+@enduml
+            `;
+
+            const encodedDiagram1 = plantumlEncoder.encode(diagram1);
+            const diagramUrl1 = `https://www.plantuml.com/plantuml/svg/${encodedDiagram1}`;
+            document.getElementById('sequence-diagram').innerHTML = `<img src="${diagramUrl1}" alt="Add to Favorites Sequence Diagram">`;
+
+            const diagram2 = `
+@startuml
+class Order {
+    +String orderID
+    +Date orderDate
+    +addProduct(Product product)
+    +calculateTotal()
+}
+
+class OrderCancellation {
+    +String orderID
+    +String cancellationReason
+    +Date cancellationDate
+    +cancelOrder()
+    +refundPayment()
+}
+
+Order "1" --> "0..1" OrderCancellation
+@enduml
+            `;
+
+            const encodedDiagram2 = plantumlEncoder.encode(diagram2);
+            const diagramUrl2 = `https://www.plantuml.com/plantuml/svg/${encodedDiagram2}`;
+            document.getElementById('class-diagram').innerHTML = `<img src="${diagramUrl2}" alt="Class Diagram for Order Cancellation">`;
+        });
+    </script>
+</head>
+<body>
+    <h1>Laboratory 14 Report</h1>
+
+    <h2>Add a New Use Case Scenario</h2>
+    <p><strong>Example Task:</strong> Add a new use case scenario where customers can save favorite products.</p>
+    
+    <h3>Solution:</h3>
+    <p><strong>Use Case Name:</strong> "Add to Favorites"</p>
+    <p><strong>Actor:</strong> Customer</p>
+    
+    <h4>Main Flow:</h4>
+    <ul>
+        <li>The customer opens a product page.</li>
+        <li>The customer clicks the "Add to Favorites" button.</li>
+        <li>The system adds the product to the customer's favorite list.</li>
+        <li>The system displays a success message to the customer.</li>
+    </ul>
+
+    <h4>Alternate Flows:</h4>
+    <ul>
+        <li>If the product is already in the favorites, the system shows a warning message.</li>
+    </ul>
+
+    <pre><code>
+public class Customer {
+    private List<Product> favorites = new ArrayList<>();
+
+    public void addToFavorites(Product product) {
+        if (!favorites.contains(product)) {
+            favorites.add(product);
+            System.out.println("Product added to favorites.");
+        } else {
+            System.out.println("This product is already in your favorites.");
+        }
+    }
+}
+    </code></pre>
+
+    <h2>Extend the Class Diagram</h2>
+    <p><strong>Example Task:</strong> Add a new class for order cancellation and update the class diagram.</p>
+    
+    <h3>Solution:</h3>
+    <p><strong>New Class:</strong> OrderCancellation</p>
+    <ul>
+        <li><strong>Attributes:</strong> orderID, cancellationReason, cancellationDate</li>
+        <li><strong>Methods:</strong> cancelOrder(), refundPayment()</li>
+    </ul>
+
+    <pre><code>
+class Order {
+    +String orderID
+    +Date orderDate
+    +addProduct(Product product)
+    +calculateTotal()
+}
+
+class OrderCancellation {
+    +String orderID
+    +String cancellationReason
+    +Date cancellationDate
+    +cancelOrder()
+    +refundPayment()
+}
+
+Order "1" --> "0..1" OrderCancellation
+    </code></pre>
+    
+    <div id="class-diagram"></div> <!-- Class diagram will be rendered here -->
+
+    <h2>Implement a New Design Pattern</h2>
+    <p><strong>Example Task:</strong> Use the Observer Pattern to notify sellers about stock changes.</p>
+    
+    <h3>Solution:</h3>
+    <pre><code>
+// Subject Interface
+interface Subject {
+    void attach(Observer o);
+    void detach(Observer o);
+    void notifyObservers();
+}
+
+// Observer Interface
+interface Observer {
+    void update();
+}
+
+// Concrete Subject
+class Inventory implements Subject {
+    private List<Observer> observers = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
+
+    public void addProduct(Product product) {
+        products.add(product);
+        notifyObservers();
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
+        notifyObservers();
+    }
+
+    @Override
+    public void attach(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void detach(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update();
+        }
+    }
+}
+
+// Concrete Observer
+class ProductObserver implements Observer {
+    private Product product;
+
+    public ProductObserver(Product product) {
+        this.product = product;
+    }
+
+    @Override
+    public void update() {
+        System.out.println("Product " + product.getDetails() + " has been updated in the inventory.");
+    }
+}
+    </code></pre>
+
+    <h2>Sequence Diagram: Add to Favorites</h2>
+    <p><strong>Example Task:</strong> Add a new sequence diagram for the "Add to Favorites" feature.</p>
+    
+    <h3>Solution:</h3>
+    <div id="sequence-diagram"></div> <!-- Sequence diagram will be rendered here -->
+
+    <p><strong>Sequence Diagram PlantUML Code:</strong></p>
+    <pre><code>
+@startuml
+actor Customer
+participant "Product Page" as ProductPage
+participant "System" as System
+participant "Customer Class" as CustomerClass
+participant "Favorites List" as FavoritesList
+Customer -> ProductPage : Opens product page
+Customer -> ProductPage : Clicks "Add to Favorites" button
+ProductPage -> System : Sends request to add product to favorites
+System -> CustomerClass : Calls addToFavorites(product)
+CustomerClass -> FavoritesList : Checks if product is already in favorites
+alt Product not in favorites
+    CustomerClass -> FavoritesList : Adds product to favorites
+    CustomerClass --> System : Returns success message
+    System --> ProductPage : Displays success message
+else Product already in favorites
+    CustomerClass --> System : Returns warning message
+    System --> ProductPage : Displays warning message
+end
+@enduml
+    </code></pre>
+
+    <h2>Implement the Adapter Pattern</h2>
+    <pre><code>
+// Product Interface
+interface Product {
+    void getDetails();
+    void addToCart();
+}
+
+// Concrete Products
+class Electronics implements Product {
+    @Override
+    public void getDetails() {
+        System.out.println("Electronics: High-end laptop");
+    }
+
+    @Override
+    public void addToCart() {
+        System.out.println("Electronics added to cart.");
+    }
+}
+
+class Clothing implements Product {
+    @Override
+    public void getDetails() {
+        System.out.println("Clothing: Blue jeans");
+    }
+
+    @Override
+    public void addToCart() {
+        System.out.println("Clothing added to cart.");
+    }
+}
+
+// Adapter Class
+class ProductAdapter {
+    private Product product;
+
+    public ProductAdapter(Product product) {
+        this.product = product;
+    }
+
+    public void getDetails() {
+        product.getDetails();
+    }
+
+    public void addToCart() {
+        product.addToCart();
+    }
+}
+    </code></pre>
+
+    <h2>Test the Observer Pattern</h2>
+    <pre><code>
+public class ObserverPatternTest {
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+        Product electronics = new Electronics();
+        ProductObserver electronicsObserver = new ProductObserver(electronics);
+        inventory.attach(electronicsObserver);
+        inventory.addProduct(electronics);
+    }
+}
+    </code></pre>
+
+    <h2>Conclusion</h2>
+    <p>
+        In this analysis, we explored various aspects of an online shopping system, focusing on its functionality, user interactions, and design patterns. By extending the system with new use cases, class diagrams, and design patterns, we ensured that the platform remains flexible, scalable, and user-friendly.
+    </p>
+    
+    <p><strong>Key takeaways from this work include:</strong></p>
+    <ol>
+        <li><strong>Use Case Scenarios:</strong> Adding new use cases, such as "Add to Favorites" and "Order Cancellation," enhances the system's functionality and improves the user experience.</li>
+        <li><strong>Class Diagrams:</strong> Extending the class diagram with new entities like OrderCancellation ensures that the system can handle complex operations like refunds and cancellations efficiently.</li>
+        <li><strong>Design Patterns:</strong> Implementing patterns like the Observer Pattern and Adapter Pattern allows the system to handle dynamic changes and ensure compatibility between different product categories.</li>
+        <li><strong>Activity Diagrams:</strong> Updating activity diagrams to reflect new processes provides a clear visual representation of user workflows.</li>
+    </ol>
+</body>
+</html>

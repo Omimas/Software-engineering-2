@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping System Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .code {
+            font-family: monospace;
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Online Shopping System Report</h1>
+    
+    <h2>1. System Description</h2>
+    <p><strong>Basic Information About the System:</strong> The system described is an Online Shopping System that enables customers to buy products, sellers to manage their product listings, and admins to oversee and control various aspects of the platform. Support agents assist customers with inquiries and issues after purchase.</p>
+    <p><strong>Description of the Reality Modeled:</strong> The system models the interaction between customers, sellers, admins, and support agents in an online shopping environment. Customers can create accounts, browse products, add items to their cart, make payments, track orders, and contact support. Sellers can manage inventory, add or remove products, approve sales, and dispatch products. Admins handle stock management, order management, and report generation, while also resolving issues related to sellers. Support agents are responsible for after-sales support and handling customer complaints.</p>
+
+    <h2>2. Dictionary</h2>
+    <p><strong>Customer:</strong> A person who uses the online shopping platform to browse, purchase, and track orders.</p>
+    <p><strong>Seller:</strong> A registered user who sells products on the platform and manages their inventory.</p>
+    <p><strong>Admin:</strong> An administrator with higher privileges who oversees the platform, handles orders, and resolves issues.</p>
+    <p><strong>Support Agent:</strong> A user responsible for assisting customers with any issues they may face, such as tracking orders or product complaints.</p>
+    <p><strong>Product:</strong> An item available for sale on the platform that customers can purchase.</p>
+    <p><strong>Order:</strong> A collection of products that a customer selects and proceeds to purchase.</p>
+    <p><strong>Cart:</strong> A virtual collection of products selected by the customer before purchase.</p>
+    <p><strong>Stock:</strong> The quantity of a product available in the system for sale.</p>
+    <p><strong>Payment Process:</strong> The procedure through which a customer pays for products selected from the platform.</p>
+    <p><strong>Shipment:</strong> The process of dispatching the purchased products to the customer.</p>
+
+    <h2>3. User Stories</h2>
+    <p>As a Customer, I want to create an account so that I can make purchases and track my orders.</p>
+    <p>As a Customer, I want to browse products so that I can find items I want to buy.</p>
+    <p>As a Customer, I want to add products to my cart so that I can purchase them later.</p>
+    <p>As a Customer, I want to complete the payment process so that I can buy the products in my cart.</p>
+    <p>As a Customer, I want to track my order so that I know when it will arrive.</p>
+    <p>As a Customer, I want to review products so that I can share my experience with other customers.</p>
+    <p>As a Seller, I want to add products to the platform so that customers can purchase them.</p>
+    <p>As a Seller, I want to approve sales so that the system processes the transactions.</p>
+    <p>As a Seller, I want to manage my inventory so that I can keep track of stock levels.</p>
+    <p>As an Admin, I want to manage orders so that I can ensure proper processing and dispatch.</p>
+    <p>As an Admin, I want to resolve issues reported by sellers so that the platform operates smoothly.</p>
+    <p>As a Support Agent, I want to provide after-sales support to customers so that their issues are resolved.</p>
+    <p>As a Support Agent, I want to inform customers about their order status so that they stay updated.</p>
+    <p>As a Support Agent, I want to handle customer complaints so that they are resolved promptly.</p>
+
+    <h2>4. Use Case Diagram</h2>
+    <pre><code class="lang-java">
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Customer
+actor Seller
+actor Admin
+actor SupportAgent
+
+skinparam actorStyle awesome
+skinparam CustomerArrowColor #1f77b4
+skinparam SellerArrowColor #ff7f0e
+skinparam AdminArrowColor #2ca02c
+skinparam SupportAgentArrowColor #d62728
+
+rectangle "Online Shopping System" {
+    rectangle "User Operations" {
+        usecase "Create Account" as CreateAccount
+        usecase "Browse Products" as BrowseProducts
+        usecase "Add to Cart" as AddToCart
+        usecase "Payment Process" as PaymentProcess
+        usecase "Track Order" as TrackOrder
+        usecase "Review Product" as ReviewProduct
+        usecase "Contact Support" as ContactSupport
+    }
+
+    rectangle "Seller Operations" {
+        usecase "Add/Remove Product" as AddRemoveProduct
+        usecase "Approve Sale" as ApproveSale
+        usecase "Dispatch Product" as DispatchProduct
+        usecase "Manage Inventory" as ManageInventory
+    }
+
+    rectangle "Admin Operations" {
+        usecase "Manage Stock" as ManageStock
+        usecase "Manage Orders" as ManageOrders
+        usecase "Resolve Seller Issues" as ResolveSellerIssues
+        usecase "Generate Reports" as GenerateReports
+    }
+
+    rectangle "Support Processes" {
+        usecase "Inform Customer" as InformCustomer
+        usecase "Check Delivery" as CheckDelivery
+        usecase "After Sales Support" as AfterSalesSupport
+        usecase "Handle Complaints" as HandleComplaints
+    }
+}
+
+Customer -[#1f77b4]-> (CreateAccount)
+Customer -[#1f77b4]-> (BrowseProducts)
+Customer -[#1f77b4]-> (AddToCart)
+Customer -[#1f77b4]-> (PaymentProcess)
+Customer -[#1f77b4]-> (TrackOrder)
+Customer -[#1f77b4]-> (ReviewProduct)
+Customer -[#1f77b4]-> (ContactSupport)
+
+Seller -[#ff7f0e]-> (AddRemoveProduct)
+Seller -[#ff7f0e]-> (ApproveSale)
+Seller -[#ff7f0e]-> (DispatchProduct)
+Seller -[#ff7f0e]-> (ManageInventory)
+
+Admin -[#2ca02c]-> (ManageStock)
+Admin -[#2ca02c]-> (ManageOrders)
+Admin -[#2ca02c]-> (ResolveSellerIssues)
+Admin -[#2ca02c]-> (GenerateReports)
+
+SupportAgent -[#d62728]-> (AfterSalesSupport)
+SupportAgent -[#d62728]-> (InformCustomer)
+SupportAgent -[#d62728]-> (CheckDelivery)
+SupportAgent -[#d62728]-> (HandleComplaints)
+
+Customer -down-> Seller : Buy Products
+Seller -right-> Admin : Request Product Approval
+Admin -up-> SupportAgent : Assign Support Cases
+SupportAgent -down-> Customer : Provide Support
+Customer -up-> Admin
+Seller -up-> Admin : Report Stock Issues
+@enduml
+    </code></pre>
+
+    <div id="use-case-diagram"></div>
+
+    <h2>5. Conclusion</h2>
+    <p>The Online Shopping System is designed to provide a seamless experience for customers, sellers, admins, and support agents. The use case diagram clearly illustrates the interactions between different actors and their respective functionalities. The system is efficient, user-friendly, and secure, ensuring real-time updates and data protection.</p>
+
+    <!-- PlantUML Encoder ve Renderer Kütüphaneleri -->
+    <script src="https://cdn.jsdelivr.net/npm/plantuml-encoder@1.4.0/dist/plantuml-encoder.min.js"></script>
+    <script>
+        const umlCode = `
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Customer
+actor Seller
+actor Admin
+actor SupportAgent
+
+skinparam actorStyle awesome
+skinparam CustomerArrowColor #1f77b4
+skinparam SellerArrowColor #ff7f0e
+skinparam AdminArrowColor #2ca02c
+skinparam SupportAgentArrowColor #d62728
+
+rectangle "Online Shopping System" {
+    rectangle "User Operations" {
+        usecase "Create Account" as CreateAccount
+        usecase "Browse Products" as BrowseProducts
+        usecase "Add to Cart" as AddToCart
+        usecase "Payment Process" as PaymentProcess
+        usecase "Track Order" as TrackOrder
+        usecase "Review Product" as ReviewProduct
+        usecase "Contact Support" as ContactSupport
+    }
+
+    rectangle "Seller Operations" {
+        usecase "Add/Remove Product" as AddRemoveProduct
+        usecase "Approve Sale" as ApproveSale
+        usecase "Dispatch Product" as DispatchProduct
+        usecase "Manage Inventory" as ManageInventory
+    }
+
+    rectangle "Admin Operations" {
+        usecase "Manage Stock" as ManageStock
+        usecase "Manage Orders" as ManageOrders
+        usecase "Resolve Seller Issues" as ResolveSellerIssues
+        usecase "Generate Reports" as GenerateReports
+    }
+
+    rectangle "Support Processes" {
+        usecase "Inform Customer" as InformCustomer
+        usecase "Check Delivery" as CheckDelivery
+        usecase "After Sales Support" as AfterSalesSupport
+        usecase "Handle Complaints" as HandleComplaints
+    }
+}
+
+Customer -[#1f77b4]-> (CreateAccount)
+Customer -[#1f77b4]-> (BrowseProducts)
+Customer -[#1f77b4]-> (AddToCart)
+Customer -[#1f77b4]-> (PaymentProcess)
+Customer -[#1f77b4]-> (TrackOrder)
+Customer -[#1f77b4]-> (ReviewProduct)
+Customer -[#1f77b4]-> (ContactSupport)
+
+Seller -[#ff7f0e]-> (AddRemoveProduct)
+Seller -[#ff7f0e]-> (ApproveSale)
+Seller -[#ff7f0e]-> (DispatchProduct)
+Seller -[#ff7f0e]-> (ManageInventory)
+
+Admin -[#2ca02c]-> (ManageStock)
+Admin -[#2ca02c]-> (ManageOrders)
+Admin -[#2ca02c]-> (ResolveSellerIssues)
+Admin -[#2ca02c]-> (GenerateReports)
+
+SupportAgent -[#d62728]-> (AfterSalesSupport)
+SupportAgent -[#d62728]-> (InformCustomer)
+SupportAgent -[#d62728]-> (CheckDelivery)
+SupportAgent -[#d62728]-> (HandleComplaints)
+
+Customer -down-> Seller : Buy Products
+Seller -right-> Admin : Request Product Approval
+Admin -up-> SupportAgent : Assign Support Cases
+SupportAgent -down-> Customer : Provide Support
+Customer -up-> Admin
+Seller -up-> Admin : Report Stock Issues
+@enduml
+        `;
+
+        const encodedUML = plantumlEncoder.encode(umlCode);
+        const diagramUrl = `https://www.plantuml.com/plantuml/svg/${encodedUML}`;
+
+        const diagramContainer = document.getElementById('use-case-diagram');
+        diagramContainer.innerHTML = `<img src="${diagramUrl}" alt="Use Case Diagram">`;
+    </script>
+</body>
+</html>

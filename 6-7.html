@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Diagrams Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .code {
+            font-family: monospace;
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Class Diagrams Report</h1>
+    
+    <h2>1. Class Diagrams</h2>
+    <p>To create a Class Diagram based on the system described in your PlantUML code and the task details, we will define several classes based on the use cases and their interactions. Each actor (Customer, Seller, Admin, and Support Agent) will correspond to certain classes, and these classes will have attributes and methods associated with them.</p>
+
+    <div id="class-diagram"></div> <!-- Resim için yer ekledik -->
+
+    <h2>2. Identified Classes</h2>
+    <ul>
+        <li><strong>Customer:</strong> Represents the customer in the system.</li>
+        <li><strong>Seller:</strong> Represents the seller.</li>
+        <li><strong>Admin:</strong> Represents the administrator.</li>
+        <li><strong>SupportAgent:</strong> Represents the support agent.</li>
+        <li><strong>Product:</strong> Represents the product that the customer can browse and purchase.</li>
+        <li><strong>Order:</strong> Represents the order made by the customer.</li>
+        <li><strong>Payment:</strong> Represents the payment process.</li>
+        <li><strong>Inventory:</strong> Represents the inventory managed by the seller.</li>
+        <li><strong>SupportTicket:</strong> Represents a support ticket created by the customer.</li>
+    </ul>
+
+    <h2>3. Class Diagram Components</h2>
+    <ul>
+        <li><strong>Attributes:</strong> The data that each class holds (e.g., CustomerID, ProductName, Quantity).</li>
+        <li><strong>Methods:</strong> Functions that can be called on an object of the class (e.g., createAccount(), addToCart()).</li>
+        <li><strong>Relations:</strong>
+            <ul>
+                <li><strong>Association:</strong> Represents a direct relationship between two classes (e.g., Customer uses Product).</li>
+                <li><strong>Aggregation:</strong> Represents a "has-a" relationship, where a class contains objects of another class (e.g., Order aggregates Product).</li>
+                <li><strong>Composition:</strong> Represents a stronger form of aggregation, indicating that one class depends on the existence of another (e.g., Order is composed of Product).</li>
+                <li><strong>Generalization:</strong> Inheritance relationships (e.g., a User class could be a generalization of Customer and Seller).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>4. Explanation</h2>
+    <ul>
+        <li><strong>User Class:</strong> An abstract base class for common attributes like userID, name, and email, with common methods like createAccount() and login().</li>
+        <li><strong>Customer, Seller, Admin, SupportAgent:</strong> These classes inherit from the User class, representing specific types of users.</li>
+        <li><strong>Product:</strong> Contains attributes like productID, productName, and price, and a method to display product details.</li>
+        <li><strong>Order:</strong> Contains information about an order made by the customer, such as orderID, customerID, and orderDate. It aggregates Product objects, meaning an order contains multiple products.</li>
+        <li><strong>Payment:</strong> Represents the payment process for an order, with methods like processPayment() and refundPayment().</li>
+        <li><strong>Inventory:</strong> The seller's inventory, which contains a list of products and their stock quantity.</li>
+        <li><strong>SupportTicket:</strong> Represents a support ticket raised by a customer for a complaint or issue, with methods to open and close the ticket.</li>
+    </ul>
+
+    <h2>5. Relations</h2>
+    <ul>
+        <li><strong>Generalization (<|--):</strong> Customer, Seller, Admin, and SupportAgent all inherit from the User class.</li>
+        <li><strong>Association (-->):</strong> The Order class contains Product objects (one order can have multiple products).</li>
+        <li><strong>Aggregation:</strong> Order aggregates Product, meaning the Order class depends on Product but the Product can exist without the Order.</li>
+        <li><strong>Composition:</strong> The Payment class processes payments for specific Order instances. If the order is deleted, the payment related to that order may not exist anymore.</li>
+    </ul>
+
+    <h2>6. Codes</h2>
+    <pre><code class="lang-java">
+@startuml
+' Defining abstract classes (e.g., User)
+abstract class User {
+  +String userID
+  +String name
+  +String email
+  +createAccount()
+  +login()
+}
+
+' Defining specific classes for Customer, Seller, Admin, and SupportAgent
+class Customer {
+  +String customerID
+  +browseProducts()
+  +addToCart()
+  +makePayment()
+  +trackOrder()
+}
+
+class Seller {
+  +String sellerID
+  +addRemoveProduct()
+  +approveSale()
+  +dispatchProduct()
+  +manageInventory()
+}
+
+class Admin {
+  +String adminID
+  +manageStock()
+  +manageOrders()
+  +resolveSellerIssues()
+  +generateReports()
+}
+
+class SupportAgent {
+  +String agentID
+  +provideSupport()
+  +handleComplaints()
+}
+
+' Defining auxiliary classes such as Product, Order, Payment, etc.
+class Product {
+  +String productID
+  +String productName
+  +double price
+  +displayProductDetails()
+}
+
+class Order {
+  +String orderID
+  +String customerID
+  +Date orderDate
+  +addProduct(product: Product)
+  +calculateTotal()
+}
+
+class Payment {
+  +String paymentID
+  +Order order
+  +processPayment()
+  +refundPayment()
+}
+
+class Inventory {
+  +String inventoryID
+  +Product product
+  +int stockQuantity
+  +updateStock()
+}
+
+class SupportTicket {
+  +String ticketID
+  +String customerID
+  +String issueDescription
+  +openTicket()
+  +closeTicket()
+}
+
+' Relationships between classes
+User <|-- Customer
+User <|-- Seller
+User <|-- Admin
+User <|-- SupportAgent
+Customer "1" --> "many" Order : places
+Order "1" --> "many" Product : contains
+Order "1" --> "1" Payment : processes
+Seller "1" --> "many" Product : manages
+Seller "1" --> "many" Inventory : owns
+SupportAgent "1" --> "many" SupportTicket : handles
+@enduml
+    </code></pre>
+
+    <h2>7. Conclusion</h2>
+    <p>The class diagram provides a clear overview of the system's structure, showing the relationships between different classes and their attributes and methods. This diagram helps in understanding the system's design and ensures that all necessary components are included for a functional online shopping system.</p>
+
+    <!-- PlantUML Encoder ve Renderer Kütüphaneleri -->
+    <script src="https://cdn.jsdelivr.net/npm/plantuml-encoder@1.4.0/dist/plantuml-encoder.min.js"></script>
+    <script>
+        const umlCode = `
+@startuml
+' Defining abstract classes (e.g., User)
+abstract class User {
+    +String userID
+    +String name
+    +String email
+    +createAccount()
+    +login()
+}
+
+' Defining specific classes for Customer, Seller, Admin, and SupportAgent
+class Customer {
+    +String customerID
+    +browseProducts()
+    +addToCart()
+    +makePayment()
+    +trackOrder()
+}
+
+class Seller {
+    +String sellerID
+    +addRemoveProduct()
+    +approveSale()
+    +dispatchProduct()
+    +manageInventory()
+}
+
+class Admin {
+    +String adminID
+    +manageStock()
+    +manageOrders()
+    +resolveSellerIssues()
+    +generateReports()
+}
+
+class SupportAgent {
+    +String agentID
+    +provideSupport()
+    +handleComplaints()
+}
+
+' Defining auxiliary classes such as Product, Order, Payment, etc.
+class Product {
+    +String productID
+    +String productName
+    +double price
+    +displayProductDetails()
+}
+
+class Order {
+    +String orderID
+    +String customerID
+    +Date orderDate
+    +addProduct(product: Product)
+    +calculateTotal()
+}
+
+class Payment {
+    +String paymentID
+    +Order order
+    +processPayment()
+    +refundPayment()
+}
+
+class Inventory {
+    +String inventoryID
+    +Product product
+    +int stockQuantity
+    +updateStock()
+}
+
+class SupportTicket {
+    +String ticketID
+    +String customerID
+    +String issueDescription
+    +openTicket()
+    +closeTicket()
+}
+
+' Relationships between classes
+User <|-- Customer
+User <|-- Seller
+User <|-- Admin
+User <|-- SupportAgent
+Customer "1" --> "many" Order : places
+Order "1" --> "many" Product : contains
+Order "1" --> "1" Payment : processes
+Seller "1" --> "many" Product : manages
+Seller "1" --> "many" Inventory : owns
+SupportAgent "1" --> "many" SupportTicket : handles
+@enduml
+        `;
+
+        const encodedUML = plantumlEncoder.encode(umlCode);
+        const diagramUrl = `https://www.plantuml.com/plantuml/svg/${encodedUML}`;
+
+        const diagramContainer = document.getElementById('class-diagram');
+        diagramContainer.innerHTML = `<img src="${diagramUrl}" alt="Class Diagram">`;
+    </script>
+</body>
+</html>

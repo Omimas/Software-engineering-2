@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Diagram Flow for the Online Shopping System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .code {
+            font-family: monospace;
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>1.) Activity Diagram Flow for the Online Shopping System</h1>
+    
+    <h2>1. Activity Diagram Flow</h2>
+    <p><strong>Start:</strong> The customer enters the system.</p>
+    <p><strong>Create Account:</strong> The customer creates an account (if not already done).</p>
+    <p><strong>Browse Products:</strong> The customer browses products.</p>
+    <p><strong>Add to Cart:</strong> The customer adds products to the shopping cart.</p>
+    <p><strong>Payment Process:</strong> After adding products, the customer proceeds with the payment.</p>
+    <p><strong>Track Order:</strong> After purchase, the customer can track the order.</p>
+    <p><strong>End:</strong> This marks the end of the process.</p>
+
+    <h2>2. Additional Activities for Seller, Admin, and Support Agent</h2>
+    <ul>
+        <li><strong>Seller:</strong> Adds/removes products, approves sales, dispatches products.</li>
+        <li><strong>Admin:</strong> Manages stock, handles orders.</li>
+        <li><strong>Support Agent:</strong> Provides after-sales support, handles complaints.</li>
+    </ul>
+
+    <div id="activity-diagram"></div>
+
+    <h2>3. Explanation of the Diagram</h2>
+    <ul>
+        <li><strong>Customer:</strong> Represents the customer flow through the system, starting from account creation (or login) to product browsing, adding products to the cart, and proceeding to payment.</li>
+        <li><strong>Seller:</strong> After the customer makes the purchase, the seller's tasks such as approving the sale and dispatching the product are captured.</li>
+        <li><strong>Admin:</strong> Admin tasks include managing stock and orders.</li>
+        <li><strong>Support Agent:</strong> After-sales support and handling complaints by the support agent.</li>
+    </ul>
+
+    <div id="explanation-diagram"></div>
+
+    <h2>4. Codes</h2>
+    <pre><code class="lang-java">
+@startuml
+|Customer|
+start
+:Create Account;
+if (Account exists?) then (yes)
+  :Login;
+else (no)
+  :Create Account;
+endif
+:Browse Products;
+:Select Products;
+:Add to Cart;
+:Proceed to Payment;
+:Make Payment;
+:Track Order;
+stop
+
+|Seller|
+start
+:Approve Sale;
+:Update Product Details;
+:Manage Inventory;
+:Respond to Customer Inquiries;
+:Dispatch Product;
+:Review Customer Feedback;
+stop
+
+|Admin|
+start
+:Manage Stock;
+:Manage Orders;
+:Approve or Reject New Sellers;
+:Analyze Platform Performance;
+:Handle Escalated Issues;
+:Update Platform Policies;
+stop
+
+|Support Agent|
+start
+:Provide Support;
+:Handle Complaints;
+:Resolve Payment Issues;
+:Assist with Returns and Refunds;
+:Guide Customers on Platform Usage;
+:Escalate Issues to Admin;
+stop
+@enduml
+    </code></pre>
+
+    <h2>5. Conclusion</h2>
+    <p>The activity diagram provides a clear overview of the flow of activities in the online shopping system. It captures the interactions between customers, sellers, admins, and support agents, ensuring a smooth and efficient shopping experience. The diagram highlights key decision points, such as account creation and payment processing, and outlines the responsibilities of each actor in the system.</p>
+
+    <!-- PlantUML Encoder ve Renderer Kütüphaneleri -->
+    <script src="https://cdn.jsdelivr.net/npm/plantuml-encoder@1.4.0/dist/plantuml-encoder.min.js"></script>
+    <script>
+        const activityUML = `
+@startuml
+|Customer|
+start
+:Create Account;
+if (Account exists?) then (yes)
+  :Login;
+else (no)
+  :Create Account;
+endif
+:Browse Products;
+:Select Products;
+:Add to Cart;
+:Proceed to Payment;
+:Make Payment;
+:Track Order;
+stop
+
+|Seller|
+start
+:Approve Sale;
+:Update Product Details;
+:Manage Inventory;
+:Respond to Customer Inquiries;
+:Dispatch Product;
+:Review Customer Feedback;
+stop
+
+|Admin|
+start
+:Manage Stock;
+:Manage Orders;
+:Approve or Reject New Sellers;
+:Analyze Platform Performance;
+:Handle Escalated Issues;
+:Update Platform Policies;
+stop
+
+|Support Agent|
+start
+:Provide Support;
+:Handle Complaints;
+:Resolve Payment Issues;
+:Assist with Returns and Refunds;
+:Guide Customers on Platform Usage;
+:Escalate Issues to Admin;
+stop
+@enduml
+        `;
+
+        const explanationUML = `
+@startuml
+|Customer|
+start
+:Create Account;
+if (Account exists?) then (yes)
+  :Login;
+else (no)
+  :Create Account;
+endif
+@enduml
+        `;
+
+        const encodeAndDisplay = (umlCode, containerId) => {
+            const encodedUML = plantumlEncoder.encode(umlCode);
+            const diagramUrl = `https://www.plantuml.com/plantuml/svg/${encodedUML}`;
+            const diagramContainer = document.getElementById(containerId);
+            diagramContainer.innerHTML = `<img src="${diagramUrl}" alt="Diagram">`;
+        };
+
+        encodeAndDisplay(activityUML, 'activity-diagram');
+        encodeAndDisplay(explanationUML, 'explanation-diagram');
+    </script>
+</body>
+</html>

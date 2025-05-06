@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Patterns Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .code {
+            font-family: monospace;
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/plantuml-encoder@1.4.0/dist/plantuml-encoder.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Factory Method Pattern Diagram
+            const factoryDiagram = `
+@startuml
+' Define the abstract Creator class
+abstract class Creator {
+    + {abstract} createProduct(): Product
+    + someOperation(): void
+}
+
+' Define Concrete Creators
+class ElectronicsFactory extends Creator {
+    + createProduct(): Product
+}
+
+class ClothingFactory extends Creator {
+    + createProduct(): Product
+}
+
+class BooksFactory extends Creator {
+    + createProduct(): Product
+}
+
+' Define the Product interface
+interface Product {
+    + doStuff(): void
+}
+
+' Define Concrete Products
+class Electronics implements Product {
+    + doStuff(): void
+}
+
+class Clothing implements Product {
+    + doStuff(): void
+}
+
+class Books implements Product {
+    + doStuff(): void
+}
+
+' Relationships
+Creator <|-- ElectronicsFactory
+Creator <|-- ClothingFactory
+Creator <|-- BooksFactory
+
+Product <|.. Electronics
+Product <|.. Clothing
+Product <|.. Books
+
+ElectronicsFactory --> Electronics : creates
+ClothingFactory --> Clothing : creates
+BooksFactory --> Books : creates
+@enduml
+            `;
+
+            const encodedFactoryDiagram = plantumlEncoder.encode(factoryDiagram);
+            const factoryDiagramUrl = `https://www.plantuml.com/plantuml/svg/${encodedFactoryDiagram}`;
+            document.getElementById('factory-diagram').innerHTML = `<img src="${factoryDiagramUrl}" alt="Factory Method Pattern Diagram">`;
+            
+            // Abstract Factory Pattern Diagram
+            const abstractFactoryDiagram = `
+@startuml
+' Define the abstract Creator class
+abstract class Creator {
+    + {abstract} createProduct(): Product
+    + someOperation(): void
+}
+
+' Define Concrete Creators
+class ElectronicsFactory extends Creator {
+    + createProduct(): Product
+}
+
+class ClothingFactory extends Creator {
+    + createProduct(): Product
+}
+
+class BooksFactory extends Creator {
+    + createProduct(): Product
+}
+
+' Define the Product interface
+interface Product {
+    + doStuff(): void
+}
+
+' Define Concrete Products
+class Electronics implements Product {
+    + doStuff(): void
+}
+
+class Clothing implements Product {
+    + doStuff(): void
+}
+
+class Books implements Product {
+    + doStuff(): void
+}
+
+' Relationships
+Creator <|-- ElectronicsFactory
+Creator <|-- ClothingFactory
+Creator <|-- BooksFactory
+
+Product <|.. Electronics
+Product <|.. Clothing
+Product <|.. Books
+
+ElectronicsFactory --> Electronics : creates
+ClothingFactory --> Clothing : creates
+BooksFactory --> Books : creates
+@enduml
+            `;
+
+            const encodedAbstractFactoryDiagram = plantumlEncoder.encode(abstractFactoryDiagram);
+            const abstractFactoryDiagramUrl = `https://www.plantuml.com/plantuml/svg/${encodedAbstractFactoryDiagram}`;
+            document.getElementById('abstract-factory-diagram').innerHTML = `<img src="${abstractFactoryDiagramUrl}" alt="Abstract Factory Pattern Diagram">`;
+        });
+    </script>
+</head>
+<body>
+    <h1>Design Patterns Report</h1>
+    
+    <h2>1. Factory Method Pattern</h2>
+    <p><strong>Identification of the Place for Factory Method in the System</strong></p>
+    <p>In a typical online shopping platform, we have different categories of products (such as electronics, clothing, and books). These categories require different types of products to be created, with each type having its own creation process. The problem arises when we need to create products dynamically based on the user's request, without hardcoding the creation process for each product type.</p>
+    <p><strong>Pattern Description</strong></p>
+    <p>The Factory Method Pattern defines an interface for creating an object, but allows subclasses to alter the type of objects that will be created. The client interacts only with the Creator interface, which delegates the task of creating the product to the subclass's implementation.</p>
+    <p><strong>Pattern Theory and Its Place in the System</strong></p>
+    <p>The Factory Method Pattern is part of the Creational Design Patterns group, which focuses on controlling the object creation mechanism. It provides a way to delegate the responsibility of creating objects to subclass factories without altering the client code. The Factory Method Pattern fits in here by allowing you to handle the product creation process dynamically based on the category requested by the user. The factories are responsible for creating the appropriate product type.</p>
+
+    <div id="factory-diagram"></div> <!-- Factory Method Pattern Diagram will appear here -->
+
+    <h3>Factory Method Pattern Code</h3>
+    <h4>Diagram Code:</h4>
+    <pre><code class="lang-java">
+@startuml
+' Define the abstract Creator class
+abstract class Creator {
+    + {abstract} createProduct(): Product
+    + someOperation(): void
+}
+
+' Define Concrete Creators
+class ElectronicsFactory extends Creator {
+    + createProduct(): Product
+}
+
+class ClothingFactory extends Creator {
+    + createProduct(): Product
+}
+
+class BooksFactory extends Creator {
+    + createProduct(): Product
+}
+
+' Define the Product interface
+interface Product {
+    + doStuff(): void
+}
+
+' Define Concrete Products
+class Electronics implements Product {
+    + doStuff(): void
+}
+
+class Clothing implements Product {
+    + doStuff(): void
+}
+
+class Books implements Product {
+    + doStuff(): void
+}
+
+' Relationships
+Creator <|-- ElectronicsFactory
+Creator <|-- ClothingFactory
+Creator <|-- BooksFactory
+
+Product <|.. Electronics
+Product <|.. Clothing
+Product <|.. Books
+
+ElectronicsFactory --> Electronics : creates
+ClothingFactory --> Clothing : creates
+BooksFactory --> Books : creates
+@enduml
+    </code></pre>
+
+    <h4>Source Code:</h4>
+    <pre><code class="lang-java">
+// Abstract Product
+interface Product {
+    void getDetails();
+    void addToCart();
+}
+
+// Concrete Products
+class Electronics implements Product {
+    @Override
+    public void getDetails() {
+        System.out.println("Electronics: High-end laptop");
+    }
+
+    @Override
+    public void addToCart() {
+        System.out.println("Electronics added to cart.");
+    }
+}
+
+class Clothing implements Product {
+    @Override
+    public void getDetails() {
+        System.out.println("Clothing: Blue jeans");
+    }
+
+    @Override
+    public void addToCart() {
+        System.out.println("Clothing added to cart.");
+    }
+}
+
+class Books implements Product {
+    @Override
+    public void getDetails() {
+        System.out.println("Books: Design Patterns by Erich Gamma");
+    }
+
+    @Override
+    public void addToCart() {
+        System.out.println("Books added to cart.");
+    }
+}
+
+// Abstract Creator
+abstract class Creator {
+    public abstract Product createProduct();
+    public void someOperation() {
+        Product product = createProduct();
+        product.getDetails();
+        product.addToCart();
+    }
+}
+
+// Concrete Creators
+class ElectronicsFactory extends Creator {
+    @Override
+    public Product createProduct() {
+        return new Electronics();
+    }
+}
+
+class ClothingFactory extends Creator {
+    @Override
+    public Product createProduct() {
+        return new Clothing();
+    }
+}
+
+class BooksFactory extends Creator {
+    @Override
+    public Product createProduct() {
+        return new Books();
+    }
+}
+
+// Client Code
+public class Main {
+    public static void main(String[] args) {
+        // Create products using ElectronicsFactory
+        Creator electronicsFactory = new ElectronicsFactory();
+        System.out.println("Creating Electronics:");
+        electronicsFactory.someOperation();
+
+        // Create products using ClothingFactory
+        Creator clothingFactory = new ClothingFactory();
+        System.out.println("\nCreating Clothing:");
+        clothingFactory.someOperation();
+
+        // Create products using BooksFactory
+        Creator booksFactory = new BooksFactory();
+        System.out.println("\nCreating Books:");
+        booksFactory.someOperation();
+    }
+}
+    </code></pre>
+
+    <h4>Test Code:</h4>
+    <pre><code class="lang-java">
+public class Main {
+    public static void main(String[] args) {
+        Creator electronicsFactory = new ElectronicsFactory();
+        Product electronics = electronicsFactory.createProduct();
+        electronics.doStuff();
+
+        Creator clothingFactory = new ClothingFactory();
+        Product clothing = clothingFactory.createProduct();
+        clothing.doStuff();
+
+        Creator booksFactory = new BooksFactory();
+        Product books = booksFactory.createProduct();
+        books.doStuff();
+    }
+}
+    </code></pre>
+
+    <h4>PseudoCode:</h4>
+    <pre><code class="lang-plaintext">
+Product product = createProduct()  
+product.getDetails()  
+product.addToCart()
+
+- **Creator**
+  - ...
+  - + createProduct(): Product
+  - + someOperation()
+
+- **ElectronicsFactory**
+  - ...
+  - + createProduct(): Product
+
+- **ClothingFactory**
+  - ...
+  - + createProduct(): Product
+
+- **BooksFactory**
+  - ...
+  - + createProduct(): Product
+
+- **Electronics**
+  - ...
+  - + getDetails()
+  - + addToCart()
+
+- **Clothing**
+  - ...
+  - + getDetails()
+  - + addToCart()
+
+- **Books**
+  - ...
+  - + getDetails()
+  - + addToCart()
+
+return new Electronics()
+    </code></pre>
+
+    <h2>2. Abstract Factory Pattern</h2>
+    <p><strong>Identification of the Place for Abstract Factory in the System</strong></p>
+    <p>In an online shopping platform, we may offer furniture collections that include matching chairs and sofas. These collections can belong to different styles, such as Victorian or Modern. The challenge is to ensure that a customer who selects a specific style gets all furniture items from the same collection. Managing these dependencies dynamically without tightly coupling the client code to specific product implementations is essential.</p>
+    <p><strong>Pattern Description</strong></p>
+    <p>The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes. This ensures that all products created by the factory are compatible and conform to a particular style or theme. The client interacts with the abstract factory interface, which delegates the creation process to concrete factories for specific product families.</p>
+    <p><strong>Pattern Theory and Its Place in the System</strong></p>
+    <p>The Abstract Factory Pattern is part of the Creational Design Patterns group. It is useful when the system needs to deal with multiple families of related objects and enforce consistency between them. In the context of an online shopping platform, this pattern ensures that customers selecting a style (e.g., Victorian or Modern) receive compatible furniture items. The Abstract Factory Pattern allows for scalability, as adding new styles involves creating new concrete factories without modifying the client code.</p>
+
+    <div id="abstract-factory-diagram"></div> <!-- Abstract Factory Pattern Diagram will appear here -->
+
+    <h3>Abstract Factory Pattern Code</h3>
+    <h4>Diagram Code:</h4>
+    <pre><code class="lang-java">
+@startuml
+' Abstract Products
+interface Chair {
+    + sitOn(): void
+}
+
+interface Sofa {
+    + lieOn(): void
+}
+
+' Concrete Products
+class VictorianChair implements Chair {
+    + sitOn(): void
+}
+
+class ModernChair implements Chair {
+    + sitOn(): void
+}
+
+class VictorianSofa implements Sofa {
+    + lieOn(): void
+}
+
+class ModernSofa implements Sofa {
+    + lieOn(): void
+}
+
+' Abstract Factory
+interface FurnitureFactory {
+    + createChair(): Chair
+    + createSofa(): Sofa
+}
+
+' Concrete Factories
+class VictorianFurnitureFactory implements FurnitureFactory {
+    + createChair(): Chair
+    + createSofa(): Sofa
+}
+
+class ModernFurnitureFactory implements FurnitureFactory {
+    + createChair(): Chair
+    + createSofa(): Sofa
+}
+
+' Relationships
+FurnitureFactory <|.. VictorianFurnitureFactory
+FurnitureFactory <|.. ModernFurnitureFactory
+
+Chair <|.. VictorianChair
+Chair <|.. ModernChair
+
+Sofa <|.. VictorianSofa
+Sofa <|.. ModernSofa
+
+VictorianFurnitureFactory --> VictorianChair : creates
+VictorianFurnitureFactory --> VictorianSofa : creates
+
+ModernFurnitureFactory --> ModernChair : creates
+ModernFurnitureFactory --> ModernSofa : creates
+@enduml
+    </code></pre>
+
+    <h4>Source Code:</h4>
+    <pre><code class="lang-java">
+// Abstract Products
+interface Chair {
+    void sitOn();
+}
+
+interface Sofa {
+    void lieOn();
+}
+
+// Concrete Products
+class VictorianChair implements Chair {
+    @Override
+    public void sitOn() {
+        System.out.println("Sitting on a Victorian chair.");
+    }
+}
+
+class ModernChair implements Chair {
+    @Override
+    public void sitOn() {
+        System.out.println("Sitting on a Modern chair.");
+    }
+}
+
+class VictorianSofa implements Sofa {
+    @Override
+    public void lieOn() {
+        System.out.println("Lying on a Victorian sofa.");
+    }
+}
+
+class ModernSofa implements Sofa {
+    @Override
+    public void lieOn() {
+        System.out.println("Lying on a Modern sofa.");
+    }
+}
+
+// Abstract Factory
+interface FurnitureFactory {
+    Chair createChair();
+    Sofa createSofa();
+}
+
+// Concrete Factories
+class VictorianFurnitureFactory implements FurnitureFactory {
+    @Override
+    public Chair createChair() {
+        return new VictorianChair();
+    }
+
+    @Override
+    public Sofa createSofa() {
+        return new VictorianSofa();
+    }
+}
+
+class ModernFurnitureFactory implements FurnitureFactory {
+    @Override
+    public Chair createChair() {
+        return new ModernChair();
+    }
+
+    @Override
+    public Sofa createSofa() {
+        return new ModernSofa();
+    }
+}
+
+// Client Code
+public class Main {
+    public static void main(String[] args) {
+        // Create a Victorian furniture family
+        FurnitureFactory victorianFactory = new VictorianFurnitureFactory();
+        Chair victorianChair = victorianFactory.createChair();
+        Sofa victorianSofa = victorianFactory.createSofa();
+
+        System.out.println("Victorian Furniture:");
+        victorianChair.sitOn();
+        victorianSofa.lieOn();
+
+        // Create a Modern furniture family
+        FurnitureFactory modernFactory = new ModernFurnitureFactory();
+        Chair modernChair = modernFactory.createChair();
+        Sofa modernSofa = modernFactory.createSofa();
+
+        System.out.println("\nModern Furniture:");
+        modernChair.sitOn();
+        modernSofa.lieOn();
+    }
+}
+    </code></pre>
+
+    <h4>Test Code:</h4>
+    <pre><code class="lang-java">
+// Client Code
+public class Main {
+    public static void main(String[] args) {
+        // Create a Victorian furniture family
+        FurnitureFactory victorianFactory = new VictorianFurnitureFactory();
+        Chair victorianChair = victorianFactory.createChair();
+        Sofa victorianSofa = victorianFactory.createSofa();
+
+        System.out.println("Victorian Furniture:");
+        victorianChair.sitOn();
+        victorianSofa.lieOn();
+
+        // Create a Modern furniture family
+        FurnitureFactory modernFactory = new ModernFurnitureFactory();
+        Chair modernChair = modernFactory.createChair();
+        Sofa modernSofa = modernFactory.createSofa();
+
+        System.out.println("\nModern Furniture:");
+        modernChair.sitOn();
+        modernSofa.lieOn();
+    }
+}
+    </code></pre>
+
+    <h4>PseudoCode:</h4>
+    <pre><code class="lang-plaintext">
+// Abstract Products
+Abstract Product Chair:
+    + sitOn()
+
+Abstract Product Sofa:
+    + lieOn()
+
+// Concrete Products
+Concrete Product VictorianChair:
+    + sitOn(): Print "Sitting on a Victorian chair."
+
+Concrete Product ModernChair:
+    + sitOn(): Print "Sitting on a Modern chair."
+
+Concrete Product VictorianSofa:
+    + lieOn(): Print "Lying on a Victorian sofa."
+
+Concrete Product ModernSofa:
+    + lieOn(): Print "Lying on a Modern sofa."
+
+// Abstract Factory
+Abstract Factory FurnitureFactory:
+    + createChair(): Chair
+    + createSofa(): Sofa
+
+// Concrete Factories
+Concrete Factory VictorianFurnitureFactory:
+    + createChair(): Return new VictorianChair()
+    + createSofa(): Return new VictorianSofa()
+
+Concrete Factory ModernFurnitureFactory:
+    + createChair(): Return new ModernChair()
+    + createSofa(): Return new ModernSofa()
+
+// Client Code
+Client:
+    - factory: FurnitureFactory
+    + Client(factory: FurnitureFactory)
+    + someOperation():
+        chair = factory.createChair()
+        sofa = factory.createSofa()
+        chair.sitOn()
+        sofa.lieOn()
+
+// Main Program
+Main:
+    + main():
+        victorianFactory = new VictorianFurnitureFactory()
+        victorianClient = new Client(victorianFactory)
+        victorianClient.someOperation()
+
+        modernFactory = new ModernFurnitureFactory()
+        modernClient = new Client(modernFactory)
+        modernClient.someOperation()
+    </code></pre>
+
+    <h2>3. Conclusion</h2>
+    <p>The Factory Method and Abstract Factory patterns are essential creational design patterns that help in managing object creation in a flexible and scalable manner. The Factory Method Pattern is useful for creating objects of a single type, while the Abstract Factory Pattern is ideal for creating families of related objects. Both patterns ensure that the system remains modular and easy to extend without modifying existing client code.</p>
+</body>
+</html>
