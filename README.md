@@ -22,9 +22,9 @@ The backend is built with Node.js and Express, and the frontend uses HTML, CSS, 
 
 ## 📁 Project Structure
 
-backend/ # Backend code (Node.js)
-frontend/ # Frontend files (HTML, CSS, JS, images)
-products.json # Product data file
-.gitignore # Git ignore file
+- backend/ # Backend code (Node.js)
+- frontend/ # Frontend files (HTML, CSS, JS, images)
+- products.json # Product data file
+- .gitignore # Git ignore file
 
 ---
