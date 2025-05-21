@@ -1,8 +1,5 @@
 # E-Commerce Project
 
-![E-Commerce Banner](https://user-images.githubusercontent.com/yourusername/yourprojectbanner.png)  
-<!-- Optional: Replace this with your project banner or logo -->
-
 ---
 
 ## 🚀 About the Project
@@ -25,3 +22,9 @@ The backend is built with Node.js and Express, and the frontend uses HTML, CSS, 
 
 ## 📁 Project Structure
 
+backend/ # Backend code (Node.js)
+frontend/ # Frontend files (HTML, CSS, JS, images)
+products.json # Product data file
+.gitignore # Git ignore file
+
+---
