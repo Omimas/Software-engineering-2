@@ -1,27 +1,27 @@
 # E-Commerce Project
 
-![E-Commerce](https://user-images.githubusercontent.com/yourusername/yourprojectbanner.png)  
-<!-- İstersen kendi bir banner ekleyebilirsin -->
+![E-Commerce Banner](https://user-images.githubusercontent.com/yourusername/yourprojectbanner.png)  
+<!-- Optional: Replace this with your project banner or logo -->
 
 ---
 
-## 🚀 Proje Hakkında
+## 🚀 About the Project
 
-Bu proje, temel özelliklere sahip bir e-ticaret uygulamasıdır. Kullanıcılar ürünleri görüntüleyebilir, sepetlerine ekleyebilir ve sipariş verebilir.
+This is a basic e-commerce application where users can browse products, add them to the cart, and place orders.
 
-Backend Node.js ve Express ile, frontend ise HTML, CSS ve JavaScript ile geliştirilmiştir.
-
----
-
-## ⚙️ Özellikler
-
-- Ürün listeleme ve kategori bazında filtreleme  
-- Kullanıcıların ürünleri sepete eklemesi  
-- Responsive (mobil uyumlu) tasarım  
-- Basit ve anlaşılır kullanıcı arayüzü  
-- Node.js tabanlı REST API
+The backend is built with Node.js and Express, and the frontend uses HTML, CSS, and JavaScript.
 
 ---
 
-## 📁 Proje Dosya Yapısı
+## ⚙️ Features
+
+- Product listing with category filtering  
+- Add products to the shopping cart  
+- Responsive design for mobile and desktop  
+- Simple and user-friendly interface  
+- REST API powered by Node.js
+
+---
+
+## 📁 Project Structure
 
