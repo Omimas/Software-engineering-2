@@ -28,3 +28,7 @@ The backend is built with Node.js and Express, and the frontend uses HTML, CSS, 
 - .gitignore # Git ignore file
 
 ---
+![image](https://github.com/user-attachments/assets/34029381-66bd-4ebd-b201-b8b2197d83e9)
+
+![image](https://github.com/user-attachments/assets/29db1867-682d-46bf-8bb3-dfc48fc7ddee)
+
